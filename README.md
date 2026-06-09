@@ -145,8 +145,8 @@ Available at `http://localhost:5173`.
 
 ## Roadmap
  
-- **Phase E (in progress)** — Outfield wall, stadium seats, city skyline backdrop, expanded field dimensions
 - **Containerization** — Docker Compose for one-command spin-up; deploy to a public URL
+- **Scenery** — Outfield wall, stadium seats, city skyline backdrop, expanded field dimensions
 - **Visual polish** — Pitcher/batter avatars, multiple stadium variants, day/night cycle
 
 
