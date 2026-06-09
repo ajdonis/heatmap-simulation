@@ -16,9 +16,9 @@ The aesthetic is deliberately PS1-era: chunky pixels, low polygon counts, vertex
 - Select any active MLB pitcher
 - Slide through every pitch with a Scorebug-style HUD showing count, outs, score, and pitch type
 - Heatmap accumulates pitch locations on the strike zone, building a visual signature of the pitcher's performance
-- Real Statcast pitch physics — release velocity, acceleration, plate crossing position
+- Real Statcast pitch physics: release velocity, acceleration, plate crossing position
 - PS1 visual aesthetic: vertex jitter, Bayer dithering, low-resolution rendering, bitmap fonts
-- 3D baseball field geometry — infield wedge, foul lines, pitcher's mound, batter's boxes
+- 3D baseball field geometry: infield wedge, foul lines, pitcher's mound, batter's boxes
 
 
 
