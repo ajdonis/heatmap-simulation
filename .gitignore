@@ -1,0 +1,39 @@
+# Python (pybaseball-service)
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.pybaseball_cache/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Node / frontend
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# Java / Spring
+target/
+build/
+.gradle/
+*.class
+
+# Secrets / local config
+.env
+.env.local
+.env.*.local
+application-local.properties
+application-secret.properties
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Logs
+*.log
