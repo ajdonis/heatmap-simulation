@@ -73,12 +73,12 @@ export default function StrikeZoneScene({ mlbamId, gamePk, onEndSimulation }) {
 
   return (
     <div className="flex-1 relative">
-      {/* dpr={0.4} → ~40% internal resolution, upscaled with image-rendering:pixelated. */}
       <Canvas camera={{ position: [5, 2.5, 10], fov: 50 }} dpr={0.45}>
         <ambientLight intensity={0.2} />
         <directionalLight position={[5, 5, 5]} />
 
         {/* Linear fog — clear to 30, opaque at 140. See IdleScene for full notes. */}
+        {/* LOOK INTO THIS ONCE STADIUM IS MORE BUILT OUT */}
         {/* <fogExp2 attach="fog" color="#003232" density={0.03} /> */}
 
         <OrbitControls enableZoom={false} maxPolarAngle={Math.PI / 2 - 0.01} />

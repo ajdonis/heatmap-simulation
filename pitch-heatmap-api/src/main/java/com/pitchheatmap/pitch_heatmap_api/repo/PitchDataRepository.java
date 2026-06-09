@@ -24,7 +24,7 @@ public interface PitchDataRepository extends JpaRepository<PitchData, PitchId>{
     List<PitchData> findPitchesByPitcherAndGame(@Param("pitcher") Long pitcher, @Param("gamePk") Long gamePk);
 
 
-    // Rich game summaries for the season dropdown — regular season only
+    // Rich game summaries for the season dropdown (regular season only)
     @Query("""
             SELECT new com.pitchheatmap.pitch_heatmap_api.dto.GameSummary(
                 p.gamePk, MIN(p.gameDate), MIN(p.homeTeam), MIN(p.awayTeam), COUNT(p)

@@ -70,10 +70,6 @@ export default function Floor() {
 
       moundDirt.repeat.set((2 * MOUND_R) / FT_PER_TILE, (2 * MOUND_R) / FT_PER_TILE)
 
-      // // ← NEW: back disc is 2r wide × r tall
-      // backDirt.repeat.set((2 * HOME_PLATE_AREA_RADIUS) / FT_PER_TILE, HOME_PLATE_AREA_RADIUS / FT_PER_TILE)
-
-
       backDirt.repeat.set((2 * HOME_PLATE_AREA_RADIUS) / FT_PER_TILE, (2 * HOME_PLATE_AREA_RADIUS) / FT_PER_TILE)
 
       setTextures({ grass, dirt, moundDirt, backDirt })
@@ -111,38 +107,11 @@ export default function Floor() {
     return s
   }, [])
 
-  // // ← CHANGED: renamed from infieldShape to wedgeShape; sharp apex at origin
-  // const wedgeShape = useMemo(() => {
-  //   const s = new Shape()
-
-  //   // Sharp apex at home plate — foul-line edges originate here
-  //   s.moveTo(0, 0)
-  //   s.lineTo(INFIELD_RADIUS * Math.cos(Math.PI / 4), INFIELD_RADIUS * Math.sin(Math.PI / 4))
-  //   s.absarc(0, 0, INFIELD_RADIUS, Math.PI / 4, 3 * Math.PI / 4, false)
-  //   s.lineTo(0, 0)
-
-  //   // Infield grass hole (unchanged from last version)
-  //   const grassPath = new Path()
-  //   const innerR = INFIELD_RADIUS - BACK_DIRT_BAND
-  //   const innerApexY = BASE_PATH_WIDTH * Math.SQRT2
-  //   const discriminant = 2 * innerR * innerR - innerApexY * innerApexY
-  //   const innerX = (-innerApexY + Math.sqrt(discriminant)) / 2
-  //   const innerY = innerX + innerApexY
-  //   const innerStartAngle = Math.atan2(innerY, innerX)
-
-  //   grassPath.moveTo(0, innerApexY)
-  //   grassPath.lineTo(innerX, innerY)
-  //   grassPath.absarc(0, 0, innerR, innerStartAngle, Math.PI - innerStartAngle, false)
-  //   grassPath.lineTo(0, innerApexY)
-
-  //   s.holes.push(grassPath)
-  //   return s
-  // }, [])
 
   const wedgeShape = useMemo(() => {
     const s = new Shape()
     const halfWidth = BASE_PATH_WIDTH / 2
-    const foulLineOffset = halfWidth * Math.SQRT2  // shape-coord offset
+    const foulLineOffset = halfWidth * Math.SQRT2  
 
     // Outer foul-line edges shifted into foul territory by halfWidth
     const xInt = (foulLineOffset + Math.sqrt(2 * INFIELD_RADIUS * INFIELD_RADIUS - foulLineOffset * foulLineOffset)) / 2
@@ -173,12 +142,11 @@ export default function Floor() {
     return s
   }, [])
 
-  // ← NEW: catcher's area as a separate half-circle behind home plate
   const backDirtShape = useMemo(() => {
     const s = new Shape()
     const r = HOME_PLATE_AREA_RADIUS
     s.moveTo(r, 0)
-    s.absarc(0, 0, r, 0, Math.PI, true)  // CW half-circle through (0, -r)
+    s.absarc(0, 0, r, 0, Math.PI, true) 
     s.lineTo(r, 0)
     return s
   }, [])

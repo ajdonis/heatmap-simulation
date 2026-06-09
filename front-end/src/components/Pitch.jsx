@@ -124,17 +124,8 @@ export default function Pitch({ pitchData, playbackSpeed = 1, isPlaying = false,
 
   if (!pitchData) return null
 
-  // return (
-  //   <mesh ref={meshRef}>
-  //     <sphereGeometry args={[0.08, 8, 6]} />
-  //     <meshLambertMaterial ref={matRef} color="#f0ece0" flatShading />
-  //   </mesh>
-  // )
+
   return (
-    // <mesh ref={meshRef} scale={0.08}>
-    //   <primitive object={nodes.Baseball.geometry} attach="geometry" />
-    //   <meshLambertMaterial ref={matRef} map={albedoTexture} flatShading />
-    // </mesh>
     <mesh ref={meshRef} scale={4}>
       <primitive object={nodes.Baseball.geometry} attach="geometry" />
       <meshLambertMaterial

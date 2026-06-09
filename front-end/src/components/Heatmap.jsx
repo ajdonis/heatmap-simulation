@@ -51,11 +51,10 @@ function applyColormap(t) {
   ]
 }
 
-// ─── Heatmap ──────────────────────────────────────────────────────────────────
+// HEATMAP
 // Props
-//   pitches – array of pitch objects. Each must have `plate_x` and `plate_z`
-//             (Statcast landing coordinates in feet). The blob is placed at
-//             the exact landing spot.
+//   pitches: array of pitch objects. Each must have `plate_x` and `plate_z`
+//      (Statcast landing coordinates in feet). The blob is placed at the exact landing spot.
 export default function Heatmap({ pitches = [] }) {
 
   const heatmapMatRef = useBayerDither()
@@ -92,11 +91,11 @@ export default function Heatmap({ pitches = [] }) {
     for (let i = 0; i < grid.length; i++) if (grid[i] > maxVal) maxVal = grid[i]
     if (maxVal === 0) maxVal = 1
 
-    // Convert density → RGBA pixels
+    // Convert density -> RGBA pixels
     const imageData = new ImageData(CANVAS_W, CANVAS_H)
     for (let i = 0; i < grid.length; i++) {
       const t = grid[i] / maxVal
-      if (t < 0.02) continue // leave fully transparent below threshold
+      if (t < 0.02) continue 
 
       const [r, g, b] = applyColormap(t)
       imageData.data[i * 4 + 0] = r

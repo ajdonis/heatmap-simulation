@@ -1,9 +1,3 @@
-// Three-section broadcast-style overlay sitting on top of the 3D canvas:
-//   1. Scorebug — teams/scores, bases diamond, inning/outs/count
-//   2. Result   — batter name + outcome of the pitch
-//   3. Data     — pitch type, release speed, spin, break, plate location, zone
-//
-// pointer-events-none so OrbitControls keeps working underneath.
 
 function BasesDiamond({ on1b, on2b, on3b }) {
   const occupied = "fill-yellow-300 stroke-yellow-300"

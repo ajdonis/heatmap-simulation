@@ -5,9 +5,9 @@ import Heatmap from './Heatmap'
 
 const GRID_COLOR = '#ffffff'
 // PROPS
-// pitches – array of pitch objects forwarded to Heatmap (MIGHT WANT TO INCLUDE THE ZONE FIELD?)
-// szBot – strike zone bottom from sz_bot in the data (per batter)
-// szTop – strike zone top from sz_top in the data (per batter)
+// pitches: array of pitch objects forwarded to Heatmap
+// szBot: strike zone bottom from sz_bot in the data (per batter)
+// szTop: strike zone top from sz_top in the data (per batter)
 export default function StrikeZone({ pitches = [], szBot = 1.5, szTop = 3.2, ...props }) {
 
   const szHeight = szTop - szBot
@@ -20,8 +20,6 @@ export default function StrikeZone({ pitches = [], szBot = 1.5, szTop = 3.2, ...
 
   // Positive z keeps grid lines in front of the heatmap planes
   const z = 0.03
-
-  
 
   return (
     <group {...props}>
@@ -42,18 +40,6 @@ export default function StrikeZone({ pitches = [], szBot = 1.5, szTop = 3.2, ...
         lineWidth={2}
       />
 
-      {/* Shadow zone outer border */}
-      {/* <Line
-        points={[
-          [-1.0, 1.0, z],
-          [ 1.0, 1.0, z],
-          [ 1.0, 4.0, z],
-          [-1.0, 4.0, z],
-          [-1.0, 1.0, z],
-        ]}
-        color={GRID_COLOR}
-        lineWidth={1}
-      /> */}
 
       {/* Vertical inner grid lines */}
       <Line points={[[left + cellW, szBot, z], [left + cellW, szTop, z]]} color={GRID_COLOR} lineWidth={1} />

@@ -1,26 +1,8 @@
 import { useEffect, useState } from "react"
 
-// Base interval between auto-advances at 1× speed, in milliseconds.
-// Actual interval = BASE / playbackSpeed.
 const BASE_PLAY_INTERVAL_MS = 2500
-
 const SPEED_OPTIONS = [0.5, 1, 2]
 
-// Bottom-center overlay for stepping through pitches in a game.
-//
-// Layout (vertical stack):
-//   Pitch [ N ] / total
-//   ━━━━━━━━━━━━━━━━━━━━━━━━━
-//   [← ▶/⏸ ⏹ →]    [0.5× 1× 2×]
-//
-// Keyboard shortcuts (when not typing in any input/textarea):
-//   ←  →    prev / next
-//   Home    jump to first
-//   End     jump to last
-//   Space   toggle play / pause
-//
-// Both `isPlaying` and `playbackSpeed` are lifted to the parent so that other
-// components (Pitch, Heatmap) can react to them.
 export default function PitchScrubber({
   pitches,
   selectedIndex,
@@ -59,9 +41,6 @@ export default function PitchScrubber({
   }, [selectedIndex, total, isPlaying, setIsPlaying])
 
   // Keyboard navigation
-  // Note: isPlaying / selectedIndex / atEnd are included as deps so the handler
-  // always has the latest values. The listener is re-attached on state change
-  // — a tiny cost, but it's what makes the spacebar shortcut work reliably.
   useEffect(() => {
     if (total === 0) return
     function handleKey(e) {
@@ -101,7 +80,7 @@ export default function PitchScrubber({
 
   if (total === 0) return null
 
-  // ─── Button handlers ───────────────────────────────────────────────────────
+  // BUTTON HANDLERS
   function goPrev() {
     setIsPlaying(false)
     setSelectedIndex(i => Math.max(0, i - 1))
@@ -126,7 +105,7 @@ export default function PitchScrubber({
     setSelectedIndex(0)
   }
 
-  // ─── Input handlers ────────────────────────────────────────────────────────
+  // INPUT HANDLERS
   function commitInput() {
     const n = parseInt(inputValue, 10)
     if (Number.isNaN(n) || n < 1) {
@@ -148,7 +127,7 @@ export default function PitchScrubber({
     }
   }
 
-  // ─── Styles ────────────────────────────────────────────────────────────────
+  // STYLES
   const btnClass =
     "w-7 h-7 flex items-center justify-center bg-white/10 rounded " +
     "disabled:opacity-25 hover:bg-white/20 transition cursor-pointer " +
@@ -167,7 +146,7 @@ export default function PitchScrubber({
   return (
     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/75 text-white rounded-md font-ui text-[13px] select-none backdrop-blur-sm flex flex-col items-center gap-2 px-4 py-3 min-w-[360px]">
 
-      {/* Pitch counter */}
+      {/* PITCH COUNTER */}
       <div className="text-white/70 tabular-nums flex items-center gap-1">
         <span>Pitch</span>
         <input
@@ -185,7 +164,7 @@ export default function PitchScrubber({
         <span>/ {total}</span>
       </div>
 
-      {/* Slider */}
+      {/* SLIDER */}
       <input
         type="range"
         min={0}
@@ -199,7 +178,6 @@ export default function PitchScrubber({
         aria-label="Pitch position"
       />
 
-      {/* Bottom row: transport on the left, speed on the right */}
       <div className="flex items-center justify-between w-full gap-3">
         <div className="flex items-center gap-1">
           <button onClick={goPrev} disabled={atStart} aria-label="Previous pitch" className={btnClass}>←</button>
