@@ -1,4 +1,4 @@
-import Panel, { PanelHeader, PanelButton } from './Panel'
+import Panel, { PanelHeader, PanelButton } from '../ui/Panel'
 
 export default function Welcome({ onContinue }) {
   return (

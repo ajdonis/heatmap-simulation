@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
-import StrikeZone from "./StrikeZone"
-import Floor from "./Floor"
+import StrikeZone from "../StrikeZone"
+import Floor from "../Floor"
 
 // Generic strike-zone
 const IDLE_SZ_BOT = 1.5

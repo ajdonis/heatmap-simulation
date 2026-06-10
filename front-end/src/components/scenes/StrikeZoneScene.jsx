@@ -2,11 +2,11 @@ import { useState, useLayoutEffect } from "react"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
 import { useQuery } from "@tanstack/react-query"
-import StrikeZone from "./StrikeZone"
-import Pitch from "./Pitch"
-import Floor from "./Floor"
-import Scorebug from "./Scorebug"
-import PitchScrubber from "./PitchScrubber"
+import StrikeZone from "../StrikeZone"
+import Pitch from "../Pitch"
+import Floor from "../Floor"
+import Scorebug from "../hud/Scorebug"
+import PitchScrubber from "../hud/PitchScrubber"
 
 async function fetchPitches({ queryKey }) {
   const [, mlbamId, gamePk] = queryKey
