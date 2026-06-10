@@ -129,23 +129,22 @@ export default function PitchScrubber({
 
   // STYLES
   const btnClass =
-    "w-7 h-7 flex items-center justify-center bg-white/10 rounded " +
+    "w-7 h-7 flex items-center justify-center bg-white/10 " +
     "disabled:opacity-25 hover:bg-white/20 transition cursor-pointer " +
     "disabled:cursor-not-allowed"
 
   const playBtnClass =
-    btnClass + (isPlaying ? " bg-yellow-300/25 hover:bg-yellow-300/35" : "")
+    btnClass + (isPlaying ? " bg-accent/25 hover:bg-accent/35" : "")
 
   const speedBtnClass = (s) =>
-    "px-2 h-7 flex items-center justify-center rounded text-[10px] tabular-nums " +
+    "px-2 h-7 flex items-center justify-center text-[10px] tabular-nums " +
     "transition cursor-pointer " +
     (playbackSpeed === s
-      ? "bg-yellow-300/25 text-white hover:bg-yellow-300/35"
+      ? "bg-accent/25 text-white hover:bg-accent/35"
       : "bg-white/10 text-white/70 hover:bg-white/20")
 
   return (
-    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/75 text-white rounded-md font-ui text-[13px] select-none backdrop-blur-sm flex flex-col items-center gap-2 px-4 py-3 min-w-[360px]">
-
+    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-gradient-to-b from-[#003838]/75 to-[#000c0c]/75 text-white border border-accent/40 font-ui text-[13px] select-none backdrop-blur-sm flex flex-col items-center gap-2 px-4 py-3 min-w-[360px]">
       {/* PITCH COUNTER */}
       <div className="text-white/70 tabular-nums flex items-center gap-1">
         <span>Pitch</span>
@@ -158,7 +157,7 @@ export default function PitchScrubber({
           onFocus={() => setIsPlaying(false)}
           onBlur={commitInput}
           onKeyDown={handleInputKey}
-          className="w-9 bg-white/10 rounded px-1 text-center text-white tabular-nums focus:outline-none focus:bg-white/20"
+          className="w-9 bg-white/10 px-1 text-center text-white tabular-nums focus:outline-none focus:bg-white/20"
           aria-label="Pitch number"
         />
         <span>/ {total}</span>
@@ -174,7 +173,7 @@ export default function PitchScrubber({
           setIsPlaying(false)
           setSelectedIndex(Number(e.target.value))
         }}
-        className="w-72 accent-yellow-300 cursor-pointer"
+        className="w-72 accent-accent cursor-pointer"
         aria-label="Pitch position"
       />
 

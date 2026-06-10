@@ -33,9 +33,9 @@ export default function StrikeZoneScene({ mlbamId, gamePk, onEndSimulation }) {
   const endButton = (
     <button
       onClick={onEndSimulation}
-      className="absolute top-4 right-4 z-10 bg-black/75 text-white font-ui text-base rounded-md px-3 py-2 hover:bg-red-500/30 transition cursor-pointer backdrop-blur-sm"
+      className="absolute top-4 right-4 z-10 bg-black/75 text-accent font-ui text-base px-3 py-2 border border-accent/40 hover:bg-red-500/30 hover:text-white hover:border-red-400/60 transition cursor-pointer backdrop-blur-sm"
     >
-      End Simulation
+      [ End Simulation ]
     </button>
   )
 

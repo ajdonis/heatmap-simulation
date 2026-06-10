@@ -1,7 +1,7 @@
 
 function BasesDiamond({ on1b, on2b, on3b }) {
-  const occupied = "fill-yellow-300 stroke-yellow-300"
-  const empty    = "fill-transparent stroke-white/40"
+  const occupied = "fill-accent stroke-accent"
+  const empty = "fill-transparent stroke-white/40"
   return (
     <svg width="32" height="32" viewBox="0 0 32 32" className="shrink-0">
       <rect x="13" y="5"  width="6" height="6"
@@ -25,7 +25,7 @@ function OutsDisplay({ count = 0 }) {
           key={i}
           className={
             "w-1.5 h-1.5 rounded-full " +
-            (i < count ? "bg-yellow-300" : "bg-white/25")
+            (i < count ? "bg-accent" : "bg-white/25")
           }
         />
       ))}
@@ -60,8 +60,7 @@ export default function Scorebug({ pitch }) {
   const fmt = (v, digits = 2) => v != null ? v.toFixed(digits) : "—"
 
   return (
-    <div className="absolute top-4 left-4 bg-black/75 text-white rounded-md font-ui text-[12px] pointer-events-none select-none backdrop-blur-sm overflow-hidden">
-
+    <div className="absolute top-4 left-4 bg-gradient-to-b from-[#003838]/75 to-[#000c0c]/75 text-white border border-accent/40 font-ui text-[12px] pointer-events-none select-none backdrop-blur-sm overflow-hidden">
       {/* ─── 1. Scorebug ──────────────────────────────────────────────── */}
       <div className="px-3 py-2 flex items-center gap-3 font-ui">
         <div className="flex flex-col gap-0.5 min-w-[60px]">
@@ -96,7 +95,7 @@ export default function Scorebug({ pitch }) {
       </div>
 
       {/* ─── 2. Batter + Result ───────────────────────────────────────── */}
-      <div className="px-3 py-2 bg-white/10 text-center font-ui">
+      <div className="px-3 py-2 bg-accent/10 text-center font-ui">
         <div className="text-white">
           {batter_name ?? "—"}
         </div>

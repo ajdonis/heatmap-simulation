@@ -7,6 +7,9 @@ export default {
         data: ['"VT323"', 'monospace'],
         ui: ['"DotGothic16"', 'sans-serif'],
       },
+      colors: {
+        accent: '#7fffaa',
+      },
     },
   },
   plugins: [],

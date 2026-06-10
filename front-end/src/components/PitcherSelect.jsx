@@ -30,10 +30,10 @@ export default function PitcherSelect({ onSelect }) {
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search by name…"
         autoFocus
-        className="bg-black/40 rounded px-3 py-2 text-md outline-none focus:bg-black/60 placeholder:text-white/30"
+        className="bg-black/40 border border-accent/20 focus:border-accent/60 px-3 py-2 text-md outline-none focus:bg-black/60 placeholder:text-white/30 transition-colors"
       />
 
-      <div className="bg-black/30 rounded max-h-[45vh] overflow-y-auto">
+      <div className="bg-black/30 border border-accent/10 max-h-[45vh] overflow-y-auto">
         {isLoading && <div className="px-3 py-4 text-md text-white/50">Loading pitchers…</div>}
         {error && <div className="px-3 py-4 text-md text-red-400">Error loading pitchers</div>}
         {!isLoading && !error && filtered.length === 0 && (
@@ -43,7 +43,7 @@ export default function PitcherSelect({ onSelect }) {
           <button
             key={p.mlbam_id}
             onClick={() => onSelect({ mlbamId: p.mlbam_id, name: p.name })}
-            className="w-full text-left px-3 py-2 text-md hover:bg-yellow-300/15 transition flex items-center justify-between cursor-pointer border-b border-white/5 last:border-b-0"
+            className="w-full text-left px-3 py-2 text-md hover:bg-accent/10 hover:text-accent transition flex items-center justify-between cursor-pointer border-b border-accent/10 last:border-b-0"
           >
             <span>{p.name}</span>
             <span className="text-md text-white/40 tabular-nums">{p.pa_against ?? "—"} PA</span>

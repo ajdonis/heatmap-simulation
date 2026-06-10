@@ -11,7 +11,6 @@ async function fetchGames({ queryKey }) {
   return res.json()
 }
 
-// Parse LocalDate string ("YYYY-MM-DD") without timezone shifting.
 function formatDate(iso) {
   const [y, m, d] = iso.split("-").map(Number)
   return new Date(y, m - 1, d).toLocaleDateString("en-US", {
@@ -35,15 +34,15 @@ export default function GameSelect({ pitcher, onSelect, onBack }) {
         <p className="text-lg uppercase tracking-wider text-white/50">Step 2 · Select a game</p>
         <button
           onClick={onBack}
-          className="text-lg text-white/50 hover:text-white transition cursor-pointer"
+          className="text-lg text-accent/60 hover:text-accent transition cursor-pointer"
         >
           ← change pitcher
         </button>
       </div>
 
-      <p className="text-lg text-center text-yellow-300/90">{pitcher.name}</p>
+      <p className="text-lg text-center text-accent/90">{pitcher.name}</p>
 
-      <div className="bg-black/30 rounded max-h-[45vh] overflow-y-auto">
+      <div className="bg-black/30 border border-accent/10 max-h-[45vh] overflow-y-auto">
         {isLoading && <div className="px-3 py-4 text-md text-white/50">Loading games…</div>}
         {error && <div className="px-3 py-4 text-md text-red-400">Error loading games</div>}
         {!isLoading && !error && sorted.length === 0 && (
@@ -53,7 +52,7 @@ export default function GameSelect({ pitcher, onSelect, onBack }) {
           <button
             key={g.game_pk}
             onClick={() => onSelect(g.game_pk)}
-            className="w-full text-left px-3 py-2.5 hover:bg-yellow-300/15 transition flex items-center justify-between cursor-pointer border-b border-white/5 last:border-b-0"
+            className="w-full text-left px-3 py-2.5 hover:bg-accent/10 hover:text-accent transition flex items-center justify-between cursor-pointer border-b border-accent/10 last:border-b-0"
           >
             <div className="flex flex-col">
               <span className="text-md">{g.away_team} @ {g.home_team}</span>
