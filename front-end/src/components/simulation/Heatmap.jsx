@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import * as THREE from 'three'
 import { DoubleSide } from 'three'
-import { useBayerDither } from '../utils/ps1Snap'
+import { useBayerDither } from '../../utils/ps1Snap'
 
 // ─── Canvas / world space bounds ─────────────────────────────────────────────
 // Generous bounds — well beyond the strike zone or any realistic batter's

@@ -2,9 +2,13 @@ import { useState, useLayoutEffect } from "react"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
 import { useQuery } from "@tanstack/react-query"
-import StrikeZone from "../StrikeZone"
-import Pitch from "../Pitch"
-import Floor from "../Floor"
+import { FlyControls } from "@react-three/drei"
+import { PointerLockControls } from "@react-three/drei"
+import StrikeZone from "../simulation/StrikeZone"
+import Pitch from "../simulation/Pitch"
+import Floor from "../environment/Floor"
+import Walls from "../environment/Walls"
+import Seats from "../environment/Seats"
 import Scorebug from "../hud/Scorebug"
 import PitchScrubber from "../hud/PitchScrubber"
 
@@ -81,8 +85,23 @@ export default function StrikeZoneScene({ mlbamId, gamePk, onEndSimulation }) {
         {/* LOOK INTO THIS ONCE STADIUM IS MORE BUILT OUT */}
         {/* <fogExp2 attach="fog" color="#003232" density={0.03} /> */}
 
-        <OrbitControls enableZoom={false} maxPolarAngle={Math.PI / 2 - 0.01} />
+        {/* FOR DEBUGGING */}
+        {/* <FlyControls movementSpeed={20} rollSpeed={0.5} dragToLook /> */}
+
+        {/* FOR  POTENTIAL CAMERA OPTIONS*/}
+        {/* <PointerLockControls /> */}
+
+        <OrbitControls enableZoom={false} 
+          // enableZoom={true} 
+          // minDistance={5}
+          // maxDistance={400}
+          // target={[0, 0, -150]}
+          maxPolarAngle={Math.PI / 2 - 0.01} />
+
+
         <Floor />
+        <Walls />
+        <Seats />
         <Pitch
           pitchData={selectedPitch}
           playbackSpeed={playbackSpeed}
@@ -98,6 +117,7 @@ export default function StrikeZoneScene({ mlbamId, gamePk, onEndSimulation }) {
       </Canvas>
 
       {endButton}
+
       <Scorebug pitch={selectedPitch} />
       <PitchScrubber
         pitches={pitches}

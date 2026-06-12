@@ -1,7 +1,10 @@
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
-import StrikeZone from "../StrikeZone"
-import Floor from "../Floor"
+import StrikeZone from "../simulation/StrikeZone"
+import Floor from "../environment/Floor"
+import Seats from "../environment/Seats"
+import Walls from "../environment/Walls"
+
 
 // Generic strike-zone
 const IDLE_SZ_BOT = 1.5
@@ -35,6 +38,9 @@ export default function IdleScene() {
         />
 
         <Floor />
+        <Walls />
+        <Seats />
+
         <StrikeZone
           position={[0, 0, -0.5]}
           pitches={[]}

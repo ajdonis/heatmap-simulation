@@ -1,4 +1,4 @@
-import Panel, { PanelHeader } from "../Panel"
+import Panel, { PanelHeader } from "../ui/Panel"
 import PitcherSelect from "./PitcherSelect"
 import GameSelect from "./GameSelect"
 

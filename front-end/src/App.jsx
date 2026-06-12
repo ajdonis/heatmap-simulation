@@ -1,8 +1,8 @@
 import { useState } from "react"
-import IdleScene from "./components/IdleScene"
-import StrikeZoneScene from "./components/StrikeZoneScene"
-import SelectionModal from "./components/SelectionModal"
-import Welcome from "./components/Welcome"
+import IdleScene from "./components/scenes/IdleScene"
+import StrikeZoneScene from "./components/scenes/StrikeZoneScene"
+import SelectionModal from "./components/modals/SelectionModal"
+import Welcome from "./components/modals/Welcome"
 import './App.css'
 
 function App() {

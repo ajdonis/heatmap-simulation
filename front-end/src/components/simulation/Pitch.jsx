@@ -2,7 +2,7 @@ import { useRef, useEffect, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import { NearestFilter } from 'three'
-import { usePS1Snap } from '../utils/ps1Snap.js'
+import { usePS1Snap } from '../../utils/ps1Snap.js'
 
 
 const PAUSE_DURATION = 0.5 // seconds to hold at landing before resetting
