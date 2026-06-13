@@ -9,6 +9,7 @@ import Pitch from "../simulation/Pitch"
 import Floor from "../environment/Floor"
 import Walls from "../environment/Walls"
 import Seats from "../environment/Seats"
+import Backdrop from "../environment/Backdrop"
 import Scorebug from "../hud/Scorebug"
 import PitchScrubber from "../hud/PitchScrubber"
 
@@ -21,7 +22,7 @@ async function fetchPitches({ queryKey }) {
   return res.json()
 }
 
-export default function StrikeZoneScene({ mlbamId, gamePk, onEndSimulation }) {
+export default function StrikeZoneScene({ mlbamId, gamePk, skyline, onEndSimulation }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [playbackSpeed, setPlaybackSpeed] = useState(1)
@@ -86,22 +87,23 @@ export default function StrikeZoneScene({ mlbamId, gamePk, onEndSimulation }) {
         {/* <fogExp2 attach="fog" color="#003232" density={0.03} /> */}
 
         {/* FOR DEBUGGING */}
-        {/* <FlyControls movementSpeed={20} rollSpeed={0.5} dragToLook /> */}
+        <FlyControls movementSpeed={20} rollSpeed={0.5} dragToLook />
 
         {/* FOR  POTENTIAL CAMERA OPTIONS*/}
         {/* <PointerLockControls /> */}
 
-        <OrbitControls enableZoom={false} 
+        {/* <OrbitControls enableZoom={false} 
           // enableZoom={true} 
           // minDistance={5}
           // maxDistance={400}
           // target={[0, 0, -150]}
-          maxPolarAngle={Math.PI / 2 - 0.01} />
+          maxPolarAngle={Math.PI / 2 - 0.01} /> */}
 
 
         <Floor />
         <Walls />
         <Seats />
+        <Backdrop choice={skyline}/>
         <Pitch
           pitchData={selectedPitch}
           playbackSpeed={playbackSpeed}

@@ -158,6 +158,9 @@ All assets are CC0 (public domain).
  
 - **Textures** — [Tiny Texture Pack](https://opengameart.org/content/tiny-texture-pack-1) on OpenGameArt
 - **Baseball model** — [Old Baseball](https://opengameart.org/content/old-baseball) by LonesomeDucky on OpenGameArt
-- **Skyline (Phase E)** — [Skyline Background](https://opengameart.org/content/skyline-background) by FabinhoSC on OpenGameArt
+- **Skylines** — [Skyline Background](https://opengameart.org/content/skyline-background) by FabinhoSC on OpenGameArt
+- **Brick wall** (outfield, side walls, backstop) — by **JosipKladaric** on OpenGameArt — CC-BY 3.0
+- **Stadium stands** — [Stadium background (16 bit)](https://opengameart.org/content/stadium-background-16-bit) by **bcsilva** on OpenGameArt — CC-BY 3.0 *(modified: cropped)*
+
 - **Fonts** — [VT323](https://fonts.google.com/specimen/VT323) and [DotGothic16](https://fonts.google.com/specimen/DotGothic16) via Google Fonts
 - **Data** — [MLB Statcast](https://baseballsavant.mlb.com/) via [pybaseball](https://github.com/jldbc/pybaseball)
