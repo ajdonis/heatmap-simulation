@@ -25,14 +25,14 @@ const FT_PER_TILE = 3
 const INFIELD_RADIUS = 110
 const HOME_PLATE_AREA_RADIUS = 8
 const BASE_PATH_WIDTH = 8    // ← TUNED DOWN from 12: narrower base paths
-const BACK_DIRT_BAND  = 20   // ← TUNED DOWN from 25: thinner back band
+const BACK_DIRT_BAND = 20   // ← TUNED DOWN from 25: thinner back band
 
 const DIRT_SEGMENTS = 12
 
 // Foul line extends from edge of batter's box to where it hits the outfield wall
 const FOUL_LINE_END_DIST = OUTFIELD_RADIUS                    // ≈ 120 ft along each axis
-const FOUL_LINE_LENGTH   = (FOUL_LINE_END_DIST - 3) * Math.SQRT2
-const FOUL_LINE_MID      = (3 + FOUL_LINE_END_DIST) / 2
+const FOUL_LINE_LENGTH = (FOUL_LINE_END_DIST - 3) * Math.SQRT2
+const FOUL_LINE_MID = (3 + FOUL_LINE_END_DIST) / 2
 
 export default function Floor() {
   const [textures, setTextures] = useState(null)
@@ -48,7 +48,7 @@ export default function Floor() {
       const moundDirt = dirt.clone()
       moundDirt.needsUpdate = true
 
-      // ← NEW: clone for the back catcher's area (its own scale)
+      //clone for the back catcher's area (its own scale)
       const backDirt = dirt.clone()
       backDirt.needsUpdate = true
 
@@ -61,12 +61,6 @@ export default function Floor() {
       }
 
       grass.repeat.set(PLANE_W / FT_PER_TILE, PLANE_D / FT_PER_TILE)
-
-      // // Wedge: bounding box is (INFIELD_RADIUS * √2) wide × INFIELD_RADIUS tall
-      // const bboxW = 2 * INFIELD_RADIUS * Math.sin(Math.PI / 4)
-      // dirt.repeat.set(bboxW / FT_PER_TILE, INFIELD_RADIUS / FT_PER_TILE)
-      // // ← CHANGED: no longer adding HOME_PLATE_AREA_RADIUS to bboxH
-      // //   since wedge no longer wraps behind home plate
 
       const halfWidthShape = (BASE_PATH_WIDTH / 2) * Math.SQRT2
       const xIntForBbox = (halfWidthShape + Math.sqrt(2 * INFIELD_RADIUS * INFIELD_RADIUS - halfWidthShape * halfWidthShape)) / 2
@@ -133,30 +127,11 @@ export default function Floor() {
 
     s.lineTo(0, -foulLineOffset)
 
-    // Grass hole — only offset by halfWidth from foul line (instead of full BASE_PATH_WIDTH)
-    // const grassPath = new Path()
-    // const innerR = INFIELD_RADIUS - BACK_DIRT_BAND
-    // const innerApexY = halfWidth * Math.SQRT2
-    // const innerDisc = 2 * innerR * innerR - innerApexY * innerApexY
-    // const innerX = (-innerApexY + Math.sqrt(innerDisc)) / 2
-    // const innerY = innerX + innerApexY
-    // const innerStartAngle = Math.atan2(innerY, innerX)
 
-    // grassPath.moveTo(0, innerApexY)
-    // grassPath.lineTo(innerX, innerY)
-    // grassPath.absarc(0, 0, innerR, innerStartAngle, Math.PI - innerStartAngle, false)
-    // grassPath.lineTo(0, innerApexY)
-
-    // grassPath.moveTo(0, 10)         // home-plate corner (10ft past home in field direction)
-    // grassPath.lineTo(60, 60)        // 1B corner
-    // grassPath.lineTo(0, 110)        // 2B corner (back of diamond)
-    // grassPath.lineTo(-60, 60)       // 3B corner
-    // grassPath.lineTo(0, 10)         // close
-
-    // Grass diamond — corners at the bases, with rounded corners and offset edges
+// Grass diamond — corners at the bases, with rounded corners and offset edges
 const BASE_DIST_FULL = 100          // 2B distance from home plate
-const PATH_OFFSET    = halfWidth * Math.SQRT2   // grass inset from foul line (same as foulLineOffset)
-const FILLET_R       = 8                         // rounding radius at each base
+const PATH_OFFSET = halfWidth * Math.SQRT2   // grass inset from foul line (same as foulLineOffset)
+const FILLET_R = 8                         // rounding radius at each base
 
 const oneB_x = (BASE_DIST_FULL - PATH_OFFSET) / 2
 const oneB_y = (BASE_DIST_FULL + PATH_OFFSET) / 2
@@ -186,10 +161,7 @@ grassPath.lineTo(cutX, CUT_Y)                          // along 1B-2B edge to cu
 const ARC_DEPTH = 3   // tune — how deep the arc dips below the chord
 const offset = (cutX * cutX - ARC_DEPTH * ARC_DEPTH) / (2 * ARC_DEPTH)
 const R = (cutX * cutX + ARC_DEPTH * ARC_DEPTH) / (2 * ARC_DEPTH)
-grassPath.absarc(0, CUT_Y + offset, R,
-                 Math.atan2(-offset, cutX),
-                 Math.atan2(-offset, -cutX),
-                 true)
+grassPath.absarc(0, CUT_Y + offset, R, Math.atan2(-offset, cutX), Math.atan2(-offset, -cutX), true)
 grassPath.lineTo(-oneB_x + FR_HALF, oneB_y + FR_HALF)  // along 2B-3B edge to 3B tangent
 
 // → 3B
@@ -200,7 +172,6 @@ grassPath.absarc(-oneB_x + FILLET_R * Math.SQRT2, oneB_y, FILLET_R, 3*Math.PI/4,
 
 // → Home
 grassPath.lineTo(0, PATH_OFFSET)
-
     s.holes.push(grassPath)
     return s
   }, [])
@@ -272,8 +243,6 @@ grassPath.lineTo(0, PATH_OFFSET)
         <shapeGeometry args={[homePlate]} />
         <meshLambertMaterial color="#ffffff" flatShading />
       </mesh>
-
-      
     </group>
   )
 }

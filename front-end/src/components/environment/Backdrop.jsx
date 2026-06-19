@@ -3,7 +3,7 @@ import { useTexture } from '@react-three/drei'
 import { NearestFilter, RepeatWrapping } from 'three'
 
 const SKYLINE_WIDTH = 1300
-const SKYLINE_HEIGHT = 200
+const SKYLINE_HEIGHT = 270
 const BACKDROP_RADIUS = 450        
 const BACKDROP_SWEEP = SKYLINE_WIDTH / BACKDROP_RADIUS 
 

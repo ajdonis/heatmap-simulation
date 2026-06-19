@@ -12,6 +12,7 @@ import Seats from "../environment/Seats"
 import Backdrop from "../environment/Backdrop"
 import Scorebug from "../hud/Scorebug"
 import PitchScrubber from "../hud/PitchScrubber"
+import Scoreboard from "../environment/Scoreboard"
 
 async function fetchPitches({ queryKey }) {
   const [, mlbamId, gamePk] = queryKey
@@ -78,8 +79,9 @@ export default function StrikeZoneScene({ mlbamId, gamePk, skyline, onEndSimulat
 
   return (
     <div className="flex-1 relative">
-      <Canvas camera={{ position: [5, 2.5, 10], fov: 50 }} dpr={0.45}>
-        <ambientLight intensity={0.2} />
+      <Canvas 
+        camera={{ position: [0, 1, 8.5], fov: 50 }} dpr={0.45}>
+        <ambientLight intensity={0.7} />
         <directionalLight position={[5, 5, 5]} />
 
         {/* Linear fog — clear to 30, opaque at 140. See IdleScene for full notes. */}
@@ -87,23 +89,27 @@ export default function StrikeZoneScene({ mlbamId, gamePk, skyline, onEndSimulat
         {/* <fogExp2 attach="fog" color="#003232" density={0.03} /> */}
 
         {/* FOR DEBUGGING */}
-        <FlyControls movementSpeed={20} rollSpeed={0.5} dragToLook />
+        {/* <FlyControls movementSpeed={20} rollSpeed={0.5} dragToLook /> */}
 
         {/* FOR  POTENTIAL CAMERA OPTIONS*/}
         {/* <PointerLockControls /> */}
 
-        {/* <OrbitControls enableZoom={false} 
-          // enableZoom={true} 
-          // minDistance={5}
-          // maxDistance={400}
-          // target={[0, 0, -150]}
-          maxPolarAngle={Math.PI / 2 - 0.01} /> */}
+        <OrbitControls 
+          enableZoom={false} 
+          target={[0, 2.5, -10]}
+          minAzimuthAngle={-Math.PI / 5}           // can't rotate more than ~30° to the left
+          maxAzimuthAngle={Math.PI / 5} 
+          maxPolarAngle={Math.PI / 2 - 0.01}
+
+           />
 
 
         <Floor />
         <Walls />
         <Seats />
+        <Scoreboard/>
         <Backdrop choice={skyline}/>
+
         <Pitch
           pitchData={selectedPitch}
           playbackSpeed={playbackSpeed}

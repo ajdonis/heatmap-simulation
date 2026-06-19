@@ -10,6 +10,8 @@ import {
   SIDE_MID_X,
   SIDE_MID_Z,
   BACKSTOP_RADIUS,
+  GAP_ANGLE,
+  OUTFIELD_HALF_SWEEP,
 } from './Walls'
 
 // Outfield 
@@ -39,7 +41,7 @@ export default function Seats() {
   const baseTex = useTexture('/textures/stadium/stands.png')
 
   const { outfieldTex, sideTex, backstopTex } = useMemo(() => {
-    const outfieldArc = OUTFIELD_RADIUS * Math.PI
+    const outfieldArc = OUTFIELD_RADIUS * OUTFIELD_HALF_SWEEP   // per-side
     const backstopArc = BACKSTOP_RADIUS * (Math.PI / 2)
 
     const outfield = baseTex.clone()
@@ -56,17 +58,23 @@ export default function Seats() {
 
   return (
     <>
-      {/* Outfield stands */}
+      {/* Right outfield stand */}
       <mesh position={[0, OF_BASE_Y + OF_HEIGHT / 2, OUTFIELD_CENTER_Z]}>
-        <cylinderGeometry
-          args={[
-            OUTFIELD_RADIUS + OF_DEPTH,
-            OUTFIELD_RADIUS,
-            OF_HEIGHT,
-            64, 1, true,
-            Math.PI / 2, Math.PI,
-          ]}
-        />
+        <cylinderGeometry args={[
+          OUTFIELD_RADIUS + OF_DEPTH, OUTFIELD_RADIUS, OF_HEIGHT,
+          32, 1, true,
+          Math.PI / 2, OUTFIELD_HALF_SWEEP,
+        ]} />
+        <meshLambertMaterial map={outfieldTex} color="#ffffff" side={2} />
+      </mesh>
+
+      {/* Left outfield stand */}
+      <mesh position={[0, OF_BASE_Y + OF_HEIGHT / 2, OUTFIELD_CENTER_Z]}>
+        <cylinderGeometry args={[
+          OUTFIELD_RADIUS + OF_DEPTH, OUTFIELD_RADIUS, OF_HEIGHT,
+          32, 1, true,
+          Math.PI + GAP_ANGLE / 2, OUTFIELD_HALF_SWEEP,
+        ]} />
         <meshLambertMaterial map={outfieldTex} color="#ffffff" side={2} />
       </mesh>
 
