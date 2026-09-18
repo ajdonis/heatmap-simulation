@@ -1,21 +1,28 @@
 from fastapi import FastAPI, HTTPException, Query
 from pybaseball import (
     statcast_pitcher,
-    playerid_reverse_lookup,
-    statcast_pitcher_expected_stats,
+    playerid_reverse_lookup,  
+    statcast_pitcher_expected_stats, 
     cache,
 )
 from datetime import datetime
+from typing import Optional
 import pandas as pd
 import math
 
+# Pybaseball caches API responses locally so repeated calls for the same data don't hit the external servers again. 
+#Important because Baseball Reference and Statcast calls can take 10-30 seconds on a cold cache.
 cache.enable()
 
 app = FastAPI(title="pybaseball-bridge")
 
 
+
+#Converts a pandas DataFrame to a list of JSON-safe dicts.
+#This replaces all NaN/NaT with None so FastAPI can serialize the response correctly.
+#Used by every endpoint that returns data.
+
 def clean_records(df: pd.DataFrame) -> list[dict]:
-    """pandas NaN is invalid JSON; replace with None and ensure native types."""
     if df.empty:
         return []
     df = df.astype(object).where(pd.notnull(df), None)
@@ -27,12 +34,10 @@ def clean_records(df: pd.DataFrame) -> list[dict]:
     return records
 
 
+
+#Adds a 'batter_name' column to a Statcast DataFrame.
+#This does a batched reverse lookup to add names so the Spring backend and frontend can display them.
 def enrich_with_batter_names(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Adds a batter_name column by reverse-looking-up each unique batter
-    mlbam ID. Batched into a single lookup so we don't hit the service
-    once per row.
-    """
     if df.empty or "batter" not in df.columns:
         return df
 
@@ -52,26 +57,23 @@ def enrich_with_batter_names(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+
+
+#Health check
 @app.get("/health")
 def health():
     return {"status": "ok"}
 
 
-# MIGHT USE LATER FOR PAST PITCHERS
-# @app.get("/pitcher/lookup")
-# def lookup(first: str = Query(...), last: str = Query(...)):
-#     df = playerid_lookup(last, first)
-#     if df.empty:
-#         raise HTTPException(404, f"No player found for {first} {last}")
-#     return clean_records(df)
 
-
+ #Returns every pitch thrown in a game by a specific pitcher.
 @app.get("/pitcher/{mlbam_id}/statcast")
 def pitcher_statcast(
     mlbam_id: int,
     start_dt: str = Query(..., description="YYYY-MM-DD"),
     end_dt: str = Query(..., description="YYYY-MM-DD"),
 ):
+
     try:
         df = statcast_pitcher(start_dt, end_dt, mlbam_id)
     except Exception as e:
@@ -80,8 +82,11 @@ def pitcher_statcast(
     return clean_records(df)
 
 
+
+
+#Returns a list of all pitchers currently playing.
 @app.get("/pitchers/active")
-def active_pitchers(season: int | None = Query(None)):
+def active_pitchers(season: Optional[int] = Query(None)):
     if season is None:
         season = datetime.now().year
 
@@ -103,3 +108,5 @@ def active_pitchers(season: int | None = Query(None)):
         }
         for _, row in df.iterrows()
     ]
+
+
